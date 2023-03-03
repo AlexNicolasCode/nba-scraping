@@ -1,5 +1,5 @@
 export type Match = {
     title: string
-    date: string
+    date: Date
     teams: string[]
 }
