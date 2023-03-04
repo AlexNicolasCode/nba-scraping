@@ -3,11 +3,26 @@ import { GetIdByTeamNameRepositorySpy, SaveMatchRepositorySpy } from "../protoco
 
 import { mockMatch, throwError } from "test/domain/mock"
 
+type SutTypes = {
+	sut: DbSaveMatch
+	saveMatchRepositorySpy: SaveMatchRepositorySpy
+	getIdByTeamNameRepositorySpy: GetIdByTeamNameRepositorySpy
+}
+
+const makeSut = (): SutTypes => {
+	const getIdByTeamNameRepositorySpy = new GetIdByTeamNameRepositorySpy()
+	const saveMatchRepositorySpy = new SaveMatchRepositorySpy()
+	const sut = new DbSaveMatch(getIdByTeamNameRepositorySpy, saveMatchRepositorySpy)
+	return {
+		sut,
+		saveMatchRepositorySpy,
+		getIdByTeamNameRepositorySpy,
+	}
+}
+
 describe("DbSaveMatch", () => {
 	test("should throw if GetIdByTeamNameRepository throws", async () => {
-		const getIdByTeamNameRepositorySpy = new GetIdByTeamNameRepositorySpy()
-		const saveMatchRepositorySpy = new SaveMatchRepositorySpy()
-		const sut = new DbSaveMatch(getIdByTeamNameRepositorySpy, saveMatchRepositorySpy)
+		const { sut, getIdByTeamNameRepositorySpy } = makeSut()
 		jest.spyOn(getIdByTeamNameRepositorySpy, "get").mockImplementationOnce(throwError)
     
 		const promise = sut.save(mockMatch())
@@ -16,9 +31,7 @@ describe("DbSaveMatch", () => {
 	})
 
 	test("should throw if SaveMatchRepositorySpy throws", async () => {
-		const getIdByTeamNameRepositorySpy = new GetIdByTeamNameRepositorySpy()
-		const saveMatchRepositorySpy = new SaveMatchRepositorySpy()
-		const sut = new DbSaveMatch(getIdByTeamNameRepositorySpy, saveMatchRepositorySpy)
+		const { sut, saveMatchRepositorySpy } = makeSut()
 		jest.spyOn(saveMatchRepositorySpy, "save").mockImplementationOnce(throwError)
     
 		const promise = sut.save(mockMatch())
