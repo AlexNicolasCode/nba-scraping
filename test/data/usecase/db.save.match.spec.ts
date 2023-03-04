@@ -1,5 +1,6 @@
 import { DbSaveMatch } from "@/data/usecase"
 import { GetIdByTeamNameRepositorySpy, SaveMatchRepositorySpy } from "../protocol"
+import { SaveMatchRepository } from "@/data/protocol"
 
 import { mockMatch, throwError } from "test/domain/mock"
 
@@ -37,5 +38,23 @@ describe("DbSaveMatch", () => {
 		const promise = sut.save(mockMatch())
     
 		await expect(promise).rejects.toThrowError()
+	})
+
+	test("should SaveMatchRepository should be called with correct params", async () => {
+		const { sut, getIdByTeamNameRepositorySpy, saveMatchRepositorySpy } = makeSut()
+		const fakeMatch = mockMatch()
+		const saveMatchRepositoryParams: SaveMatchRepository.Params = {
+			title: fakeMatch.title,
+			date: fakeMatch.date,
+			teams: [
+				getIdByTeamNameRepositorySpy.result,
+				getIdByTeamNameRepositorySpy.result,
+			]
+			
+		}
+    
+		await sut.save(fakeMatch)
+    
+		expect(saveMatchRepositorySpy.data).toStrictEqual(saveMatchRepositoryParams)
 	})
 })
