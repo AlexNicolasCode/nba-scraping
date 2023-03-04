@@ -1,5 +1,5 @@
 export interface GetIdByTeamNameRepository {
-    get: (name: string) => Promise<GetIdByTeamNameRepository.Result>
+    getIdByName: (name: string) => Promise<GetIdByTeamNameRepository.Result>
 }
 
 export namespace GetIdByTeamNameRepository {

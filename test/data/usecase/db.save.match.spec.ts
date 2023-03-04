@@ -24,7 +24,7 @@ const makeSut = (): SutTypes => {
 describe("DbSaveMatch", () => {
 	test("should throw if GetIdByTeamNameRepository throws", async () => {
 		const { sut, getIdByTeamNameRepositorySpy } = makeSut()
-		jest.spyOn(getIdByTeamNameRepositorySpy, "get").mockImplementationOnce(throwError)
+		jest.spyOn(getIdByTeamNameRepositorySpy, "getIdByName").mockImplementationOnce(throwError)
     
 		const promise = sut.save(mockMatch())
     

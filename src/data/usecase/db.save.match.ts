@@ -9,8 +9,8 @@ export class DbSaveMatch implements SaveMatch {
 	) {}
 
 	async save (data: Match): Promise<void> {
-		const firstTeam = await this.getIdByTeamNameRepository.get(data.teams[0])
-		const secondTeam = await this.getIdByTeamNameRepository.get(data.teams[1])
+		const firstTeam = await this.getIdByTeamNameRepository.getIdByName(data.teams[0])
+		const secondTeam = await this.getIdByTeamNameRepository.getIdByName(data.teams[1])
 		const saveMatchRepositoryParams: SaveMatchRepository.Params = {
 			title: data.title,
 			date: data.date,

@@ -7,7 +7,7 @@ export class GetIdByTeamNameRepositorySpy implements GetIdByTeamNameRepository {
 	result = { id: faker.datatype.number() }
 
 
-	async get (name: string): Promise<GetIdByTeamNameRepository.Result> {
+	async getIdByName (name: string): Promise<GetIdByTeamNameRepository.Result> {
 		this.name = name
 		return this.result
 	}
