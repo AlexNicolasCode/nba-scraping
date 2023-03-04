@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker"
 
 import { SaveMatchRepository } from "@/data/protocol"
-
-import { MatchPostgresRepository, prisma } from "@/infra/database/postgres/prisma"
+import { MatchPostgresRepository, prisma } from "@/infra/database"
 
 describe("MatchPostgresRepository", () => {
 	beforeEach(async () => {
