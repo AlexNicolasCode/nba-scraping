@@ -1,26 +1,6 @@
 import { faker } from "@faker-js/faker"
 
-import { GetTeamByNameRepository } from "@/data/protocol"
-import { prisma } from "@/infra/database"
-
-class TeamPostgresRepository implements GetTeamByNameRepository {
-	async getByName (name: string): Promise<GetTeamByNameRepository.Result> {
-		const team = await prisma.team.findFirst({
-			where: {
-				title: name
-			},
-			include: {
-				matchs: true
-			}
-		})
-		if (team) {
-			return {
-				id: team.id,
-				title: team.title,
-			}
-		}
-	}
-}
+import { prisma, TeamPostgresRepository } from "@/infra/database"
 
 describe("TeamPostgresRepository", () => {
 	afterEach(async () => {
