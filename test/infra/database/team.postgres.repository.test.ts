@@ -43,4 +43,13 @@ describe("TeamPostgresRepository", () => {
 			title: fakeTeamName,
 		})
 	})
+
+	test("should return undefined when team not found", async () => {
+		const sut = new TeamPostgresRepository()
+		const fakeTeamName = faker.random.words()
+
+		const team = await sut.getByName(fakeTeamName)
+
+		expect(team).toBeUndefined()
+	})
 })
