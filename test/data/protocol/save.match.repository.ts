@@ -1,10 +1,9 @@
-import { Match } from "@/domain/model"
 import { SaveMatchRepository } from "@/data/protocol"
 
 export class SaveMatchRepositorySpy implements SaveMatchRepository {
-	data?: Match
+	data?: SaveMatchRepository.Params
 
-	async save (data: Match): Promise<void> {
+	async save (data: SaveMatchRepository.Params): Promise<void> {
 		this.data = data
 	}
 }
