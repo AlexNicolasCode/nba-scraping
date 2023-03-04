@@ -1,5 +1,13 @@
-import { Match } from "@/domain/model"
-
 export interface SaveMatchRepository {
-    save: (data: Match) => Promise<void>
+    save: (data: SaveMatchRepository.Params) => Promise<void>
+}
+
+export namespace SaveMatchRepository {
+    export type Params = {
+        title: string
+        date: Date,
+        teams: {
+            id: number
+        }[]
+    }
 }
