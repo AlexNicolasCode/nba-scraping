@@ -1,19 +1,7 @@
-import { Match } from "@/domain/model"
-import { SaveMatchRepository } from "@/data/protocol"
-import { SaveMatch } from "@/domain/usecase"
+import { DbSaveMatch } from "@/data/usecase"
 import { SaveMatchRepositorySpy } from "../protocol"
+
 import { mockMatch, throwError } from "test/domain/mock"
-
-class DbSaveMatch implements SaveMatch {
-	constructor (
-        private readonly saveMatchRepository: SaveMatchRepository
-	) {}
-
-	async save (data: Match): Promise<void> {
-		await this.saveMatchRepository.save(data)
-		return
-	}
-}
 
 describe("DbSaveMatch", () => {
 	test("should throw if SaveMatchRepositorySpy throws", async () => {
