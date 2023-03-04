@@ -7,7 +7,7 @@ export namespace SaveMatchRepository {
         title: string
         date: Date,
         teams: {
-            id: number
+            id?: number
         }[]
     }
 }

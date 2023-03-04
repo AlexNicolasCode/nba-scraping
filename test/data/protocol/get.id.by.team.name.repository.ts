@@ -1,13 +1,16 @@
 import { faker } from "@faker-js/faker"
 
-import { GetIdByTeamNameRepository } from "@/data/protocol"
+import { GetTeamByNameRepository } from "@/data/protocol"
 
-export class GetIdByTeamNameRepositorySpy implements GetIdByTeamNameRepository {
+export class GetTeamByNameRepositorySpy implements GetTeamByNameRepository {
 	name?: string
-	result = { id: faker.datatype.number() }
+	result = {
+		id: faker.datatype.number(),
+		title: faker.random.words(),
+	}
 
 
-	async getIdByName (name: string): Promise<GetIdByTeamNameRepository.Result> {
+	async getByName (name: string): Promise<GetTeamByNameRepository.Result> {
 		this.name = name
 		return this.result
 	}
