@@ -1,7 +1,7 @@
-
-import { GetPageDataRepository } from "@/data/protocol/http"
-
 import axios from "axios"
+
+import { AxiosClientRepository } from "@/infra/http"
+
 import { throwError } from "test/domain/mock"
 
 jest.mock("axios", () => ({
@@ -9,12 +9,6 @@ jest.mock("axios", () => ({
 		return "any_string"
 	},
 }))
-
-class AxiosClientRepository implements GetPageDataRepository {
-	async getPageData (link: string): Promise<GetPageDataRepository.Result> {
-		return await axios.get(link)
-	}
-}
 
 describe("AxiosClient", () => {
 	test("should throw if axios throws", async () => {
