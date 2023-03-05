@@ -1,1 +1,1 @@
-export * from "./get.page.data"
+export * from "./get.page.data.repository"
