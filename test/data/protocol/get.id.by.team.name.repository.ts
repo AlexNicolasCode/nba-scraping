@@ -4,9 +4,11 @@ import { GetTeamByNameRepository } from "@/data/protocol"
 
 export class GetTeamByNameRepositorySpy implements GetTeamByNameRepository {
 	name?: string
-	result = {
+	result: GetTeamByNameRepository.Result = {
 		id: faker.datatype.number(),
-		title: faker.random.words(),
+		name: faker.random.words(),
+		acronym: faker.random.words(),
+		profileLink: faker.random.words(),
 	}
 
 
