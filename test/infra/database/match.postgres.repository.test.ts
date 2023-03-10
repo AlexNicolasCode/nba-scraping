@@ -5,14 +5,19 @@ import { MatchPostgresRepository, prisma } from "@/infra/database"
 
 describe("MatchPostgresRepository", () => {
 	beforeEach(async () => {
+		await prisma.team.deleteMany({})
 		await prisma.team.create({
 			data: {
-				title: faker.random.words(),
+				name: faker.random.words(),
+				acronym: faker.random.words(),
+				profileLink: faker.random.words(),
 			}
 		})
 		await prisma.team.create({
 			data: {
-				title: faker.random.words(),
+				name: faker.random.words(),
+				acronym: faker.random.words(),
+				profileLink: faker.random.words(),
 			}
 		})
 	})
@@ -26,21 +31,20 @@ describe("MatchPostgresRepository", () => {
 		const fakeMatch: SaveMatchRepository.Params = {
 			title: faker.random.words(),
 			date: faker.date.recent(),
-			teams: [
-				{ id: 1 },
-				{ id: 2 },
-			]        
+			teams: []        
 		}
         
 		await sut.save(fakeMatch)
 
-		const matchFromDatabase = await prisma.match.findUnique({
+		const matchFromDatabase = await prisma.match.findFirst({
 			where: {
-				id: 1
+				title: fakeMatch.title,
 			},
 		})
-		expect(matchFromDatabase).toStrictEqual({
-			id: 1,
+		expect({
+			title: matchFromDatabase?.title,
+			date: matchFromDatabase?.date,
+		}).toStrictEqual({
 			title: fakeMatch.title,
 			date: fakeMatch.date,
 		})

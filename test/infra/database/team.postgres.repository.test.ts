@@ -4,10 +4,10 @@ import { prisma, TeamPostgresRepository } from "@/infra/database"
 
 describe("TeamPostgresRepository", () => {
 	describe("getByName()", () => {
-		afterEach(async () => {
+		beforeEach(async () => {
 			await prisma.team.deleteMany({})
 		})
-		
+
 		test("should get correct team", async () => {
 			const sut = new TeamPostgresRepository()
 			const fakeTeam = {
@@ -21,10 +21,11 @@ describe("TeamPostgresRepository", () => {
 	
 			const team = await sut.getByName(fakeTeam.name)
 	
-			expect(team).toStrictEqual({
-				id: 1,
-				...fakeTeam,
-			})
+			expect({
+				name: team?.name,
+				acronym: team?.acronym,
+				profileLink: team?.profileLink,
+			}).toStrictEqual(fakeTeam)
 		})
 	
 		test("should return undefined when team not found", async () => {
@@ -38,6 +39,10 @@ describe("TeamPostgresRepository", () => {
 	})
 
 	describe("saveTeam()", () => {
+		beforeEach(async () => {
+			await prisma.team.deleteMany({})
+		})
+
 		test("should save correct team", async () => {
 			const sut = new TeamPostgresRepository()
 			const fakeTeam = {
@@ -53,8 +58,11 @@ describe("TeamPostgresRepository", () => {
 					name: fakeTeam.name
 				}
 			})
-			expect(team).toStrictEqual({
-				id: 1,
+			expect({
+				name: team?.name,
+				acronym: team?.acronym,
+				profileLink: team?.profileLink,
+			}).toStrictEqual({
 				...fakeTeam,
 			})
 		})
