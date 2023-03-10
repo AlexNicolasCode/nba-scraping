@@ -6,16 +6,15 @@ export class TeamPostgresRepository implements GetTeamByNameRepository {
 	async getByName (name: string): Promise<GetTeamByNameRepository.Result> {
 		const team = await prisma.team.findFirst({
 			where: {
-				name: name
+				name: name,
 			},
-			include: {
-				matchs: true
-			}
 		})
 		if (team) {
 			return {
 				id: team.id,
 				name: team.name,
+				acronym: team.acronym,
+				profileLink: team.profileLink,
 			}
 		}
 	}

@@ -9,18 +9,20 @@ describe("TeamPostgresRepository", () => {
 
 	test("should get correct team", async () => {
 		const sut = new TeamPostgresRepository()
-		const fakeTeamName = faker.random.words()
+		const fakeTeam = {
+			name: faker.random.words(),
+			acronym: faker.random.word(),
+			profileLink: faker.random.word(),
+		}
 		await prisma.team.create({
-			data: {
-				title: fakeTeamName
-			}
+			data: fakeTeam
 		})
 
-		const team = await sut.getByName(fakeTeamName)
+		const team = await sut.getByName(fakeTeam.name)
 
 		expect(team).toStrictEqual({
 			id: 1,
-			title: fakeTeamName,
+			...fakeTeam,
 		})
 	})
 
