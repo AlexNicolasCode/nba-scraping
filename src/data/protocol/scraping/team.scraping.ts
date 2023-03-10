@@ -1,11 +1,10 @@
 export interface TeamScraping {
-    run: (team: string) => Promise<void>
+    run: (team: string) => Promise<TeamScraping.Result>
 }
 
 export namespace TeamScraping {
     export type Result = {
         name: string
-        externalId: string
         link: string
     }[]
 }
