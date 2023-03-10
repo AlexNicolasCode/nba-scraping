@@ -1,6 +1,7 @@
 import { TeamScraping } from "@/data/protocol"
 
 import * as cheerio from "cheerio"
+import { throwError } from "test/domain/mock"
 
 class NBATeamCheerioScraping implements TeamScraping {
 	async run (pageContent: string): Promise<TeamScraping.Result> {
@@ -29,6 +30,16 @@ class NBATeamCheerioScraping implements TeamScraping {
 }
 
 describe("NBATeamCheerioScraping", () => {
+	test("should throw when cheerio throws", async () => {
+		const fakePageData = "any_page_data"
+		const sut = new NBATeamCheerioScraping()
+		jest.spyOn(cheerio, "load").mockImplementationOnce(throwError)
+
+		const promise = sut.run(fakePageData)
+		
+		await expect(promise).rejects.toThrow()
+	})
+
 	test("should return correct value on success", async () => {
 		const fakeReturn = {
 			name: "any_team",
