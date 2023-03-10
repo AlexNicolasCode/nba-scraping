@@ -1,8 +1,8 @@
-import { SaveTeamRepositorySpy } from "../protocol"
-
-import { mockTeam, throwError } from "test/domain/mock"
 import { SaveTeam } from "@/domain/usecase"
 import { SaveTeamRepository } from "@/data/protocol"
+
+import { SaveTeamRepositorySpy } from "../protocol"
+import { mockTeam, throwError } from "test/domain/mock"
 
 
 export class DbSaveTeam implements SaveTeam {
