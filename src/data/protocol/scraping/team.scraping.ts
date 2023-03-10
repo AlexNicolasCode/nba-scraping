@@ -5,6 +5,7 @@ export interface TeamScraping {
 export namespace TeamScraping {
     export type Result = {
         name: string
+        acronym: string
         link: string
     }[]
 }
