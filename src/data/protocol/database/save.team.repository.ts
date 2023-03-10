@@ -1,5 +1,5 @@
 export interface SaveTeamRepository {
-    save: (data: SaveTeamRepository.Params) => Promise<void>
+    saveTeam: (data: SaveTeamRepository.Params) => Promise<void>
 }
 
 export namespace SaveTeamRepository {
