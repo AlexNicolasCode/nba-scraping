@@ -1,5 +1,5 @@
 export type Team = {
-    id: number
-    title: string
-    matchs: number[]
+    name: string
+    acronym: string
+    profileLink: string
 }
