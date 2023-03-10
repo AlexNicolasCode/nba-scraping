@@ -1,11 +1,12 @@
-import { GetTeamByNameRepository } from "@/data/protocol"
 import { prisma } from "./prisma.client"
+
+import { GetTeamByNameRepository } from "@/data/protocol"
 
 export class TeamPostgresRepository implements GetTeamByNameRepository {
 	async getByName (name: string): Promise<GetTeamByNameRepository.Result> {
 		const team = await prisma.team.findFirst({
 			where: {
-				title: name
+				name: name
 			},
 			include: {
 				matchs: true
@@ -14,7 +15,7 @@ export class TeamPostgresRepository implements GetTeamByNameRepository {
 		if (team) {
 			return {
 				id: team.id,
-				title: team.title,
+				name: team.name,
 			}
 		}
 	}

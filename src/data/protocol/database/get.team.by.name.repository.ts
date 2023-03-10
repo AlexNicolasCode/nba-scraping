@@ -5,6 +5,6 @@ export interface GetTeamByNameRepository {
 export namespace GetTeamByNameRepository {
     export type Result = {
         id: number
-        title: string
+        name: string
     } | undefined
 }
