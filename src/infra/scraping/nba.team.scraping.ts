@@ -6,11 +6,11 @@ export class NBATeamCheerioScraping implements TeamScraping {
 	async run (pageContent: string): Promise<TeamScraping.Result> {
 		const $page = cheerio.load(pageContent)
 		const teamsLinks = $page(".AnchorLink:contains('Estatísticas')")
-			.map((index: number, team: cheerio.Element) => {
+			.map((_index: number, team: cheerio.Element) => {
 				return $page(team).attr("href")
 			}).get()
 		const teamAcronym = $page(".AnchorLink:contains('Estatísticas')")
-			.map((index: number, team: cheerio.Element) => {
+			.map((_index: number, team: cheerio.Element) => {
 				const link = $page(team).attr("href")
 				const acronymPositionInString = 6 
 				if (link) {
