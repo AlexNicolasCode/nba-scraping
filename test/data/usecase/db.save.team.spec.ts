@@ -1,19 +1,7 @@
-import { SaveTeam } from "@/domain/usecase"
-import { SaveTeamRepository } from "@/data/protocol"
+import { DbSaveTeam } from "@/data/usecase"
 
 import { SaveTeamRepositorySpy } from "../protocol"
 import { mockTeam, throwError } from "test/domain/mock"
-
-
-export class DbSaveTeam implements SaveTeam {
-	constructor (
-        private readonly saveTeamRepository: SaveTeamRepository,
-	) {}
-
-	async save (data: SaveTeam.Params): Promise<void> {
-		await this.saveTeamRepository.saveTeam(data)
-	}
-}
 
 type SutTypes = {
 	sut: DbSaveTeam
