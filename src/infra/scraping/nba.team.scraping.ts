@@ -1,5 +1,6 @@
-import { TeamScraping } from "@/data/protocol"
 import * as cheerio from "cheerio"
+
+import { TeamScraping } from "@/data/protocol"
 
 export class NBATeamCheerioScraping implements TeamScraping {
 	async run (pageContent: string): Promise<TeamScraping.Result> {
