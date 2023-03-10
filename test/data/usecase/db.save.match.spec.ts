@@ -47,8 +47,8 @@ describe("DbSaveMatch", () => {
 			title: fakeMatch.title,
 			date: fakeMatch.date,
 			teams: [
-				getTeamByNameRepositorySpy.result,
-				getTeamByNameRepositorySpy.result,
+				{ id: getTeamByNameRepositorySpy.result?.id },
+				{ id: getTeamByNameRepositorySpy.result?.id },
 			]
 			
 		}
