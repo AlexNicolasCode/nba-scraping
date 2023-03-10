@@ -5,5 +5,5 @@ export interface GetPage {
 export namespace GetPage {
     export type Result = {
         data: string
-    }
+    } | undefined
 }
