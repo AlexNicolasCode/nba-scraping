@@ -4,8 +4,8 @@ export interface SaveTeam {
 
 export namespace SaveTeam {
     export type Params = {
-        title: string
-        date: Date
-        teams: string[]
+        name: string
+        acronym: string
+        profileLink: string
     }
 }
