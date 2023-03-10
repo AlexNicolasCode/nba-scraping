@@ -1,3 +1,3 @@
 export interface Scraping {
-    run: (link: string) => void
+    run: (link: string) => Promise<void>
 }
