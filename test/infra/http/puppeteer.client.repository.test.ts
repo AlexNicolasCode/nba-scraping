@@ -23,4 +23,12 @@ describe("PuppeteerClientRepository", () => {
         
 		await expect(promise).rejects.toThrow()
 	})
+
+	test("should return correct page data", async () => {
+		const sut = new PuppeteerClientRepository()
+
+		const result = await sut.getPageData("https://example.com")
+        
+		expect(result).not.toBeUndefined()
+	})
 })
