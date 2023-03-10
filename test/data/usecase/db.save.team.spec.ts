@@ -38,4 +38,12 @@ describe("DbSaveTeam", () => {
     
 		await expect(promise).rejects.toThrowError()
 	})
+
+	test("should return undefined on success", async () => {
+		const { sut } = makeSut()
+    
+		const result = await sut.save(mockTeam())
+    
+		expect(result).toBeUndefined()
+	})
 })
