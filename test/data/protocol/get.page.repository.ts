@@ -1,15 +1,15 @@
 import { faker } from "@faker-js/faker"
 
-import { GetPageDataRepository } from "@/data/protocol"
+import { GetPageRepository } from "@/data/protocol"
 
-export class GetPageDataRepositorySpy implements GetPageDataRepository {
+export class GetPageRepositorySpy implements GetPageRepository {
 	link?: string
-	result: GetPageDataRepository.Result = {
+	result: GetPageRepository.Result = {
 		data: faker.datatype.string()
 	}
 
 
-	async getPageData (link: string): Promise<GetPageDataRepository.Result> {
+	async getPage (link: string): Promise<GetPageRepository.Result> {
 		this.link = link
 		return this.result
 	}

@@ -1,8 +1,8 @@
-export interface GetPageDataRepository {
-    getPageData: (link: string) => Promise<GetPageDataRepository.Result>
+export interface GetPageRepository {
+    getPage: (link: string) => Promise<GetPageRepository.Result>
 }
 
-export namespace GetPageDataRepository {
+export namespace GetPageRepository {
     export type Result = {
         data: string
     } | undefined

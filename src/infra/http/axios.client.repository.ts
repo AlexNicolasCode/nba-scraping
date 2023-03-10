@@ -1,9 +1,9 @@
 import axios from "axios"
 
-import { GetPageDataRepository } from "@/data/protocol/http"
+import { GetPageRepository } from "@/data/protocol/http"
 
-export class AxiosClientRepository implements GetPageDataRepository {
-	async getPageData (link: string): Promise<GetPageDataRepository.Result> {
+export class AxiosClientRepository implements GetPageRepository {
+	async getPage (link: string): Promise<GetPageRepository.Result> {
 		return await axios.get(link)
 	}
 }

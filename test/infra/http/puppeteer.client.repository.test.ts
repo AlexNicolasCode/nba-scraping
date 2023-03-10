@@ -9,7 +9,7 @@ describe("PuppeteerClientRepository", () => {
 		const sut = new PuppeteerClientRepository()
 		jest.spyOn(puppeteer, "launch").mockImplementationOnce(throwError)
 
-		const promise = sut.getPageData("https://example.com")
+		const promise = sut.getPage("https://example.com")
         
 		await expect(promise).rejects.toThrow()
 	})
@@ -17,7 +17,7 @@ describe("PuppeteerClientRepository", () => {
 	test("should return correct page data", async () => {
 		const sut = new PuppeteerClientRepository()
 
-		const result = await sut.getPageData("https://example.com")
+		const result = await sut.getPage("https://example.com")
         
 		expect(result).not.toBeUndefined()
 	})

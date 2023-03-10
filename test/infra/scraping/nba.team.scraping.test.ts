@@ -6,11 +6,11 @@ import { throwError } from "test/domain/mock"
 
 describe("NBATeamCheerioScraping", () => {
 	test("should throw when cheerio throws", async () => {
-		const fakePageData = "any_page_data"
+		const fakePage = "any_page_data"
 		const sut = new NBATeamCheerioScraping()
 		jest.spyOn(cheerio, "load").mockImplementationOnce(throwError)
 
-		const promise = sut.run(fakePageData)
+		const promise = sut.run(fakePage)
 		
 		await expect(promise).rejects.toThrow()
 	})
@@ -22,13 +22,13 @@ describe("NBATeamCheerioScraping", () => {
 			link: "/any_path/any_path/any_path/any_path/any_path/any_acronym",
 
 		}
-		const fakePageData = `
+		const fakePage = `
 			<h2>${fakeReturn.name}</h2>
 			<a class='AnchorLink' href=${fakeReturn.link}>Estatísticas</a>
 		`
 		const sut = new NBATeamCheerioScraping()
 
-		const result = await sut.run(fakePageData)
+		const result = await sut.run(fakePage)
 		
 		expect(result).toStrictEqual([fakeReturn])
 	})

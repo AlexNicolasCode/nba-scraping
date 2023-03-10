@@ -1,9 +1,9 @@
 import * as puppeteer from "puppeteer"
 
-import { GetPageDataRepository } from "../../data/protocol/http/get.page.data.repository"
+import { GetPageRepository } from "../../data/protocol/http/get.page.data.repository"
 
-export class PuppeteerClientRepository implements GetPageDataRepository {
-	async getPageData (link: string): Promise<GetPageDataRepository.Result> {
+export class PuppeteerClientRepository implements GetPageRepository {
+	async getPage (link: string): Promise<GetPageRepository.Result> {
 		const browser = await puppeteer.launch()
 		const pagePuppeteer = await browser.newPage()
 		await pagePuppeteer.goto(link)

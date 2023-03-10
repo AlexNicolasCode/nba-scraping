@@ -1,13 +1,13 @@
 import { ClientGetPage } from "@/data/usecase"
 
-import { GetPageDataRepositorySpy } from "test/data/protocol"
+import { GetPageRepositorySpy } from "test/data/protocol"
 import { throwError } from "test/domain/mock"
 
 describe("ClientGetPage", () => {
 	test("should throw when GetPageRepository throws", async () => {
-		const getPageDataRepositorySpy = new GetPageDataRepositorySpy()
-		const sut = new ClientGetPage(getPageDataRepositorySpy)
-		jest.spyOn(getPageDataRepositorySpy, "getPageData").mockImplementationOnce(throwError)
+		const getPageRepositorySpy = new GetPageRepositorySpy()
+		const sut = new ClientGetPage(getPageRepositorySpy)
+		jest.spyOn(getPageRepositorySpy, "getPage").mockImplementationOnce(throwError)
 
 		const promise = sut.getPage("any_link")
 
@@ -15,11 +15,11 @@ describe("ClientGetPage", () => {
 	})
 
 	test("should return correct data", async () => {
-		const getPageDataRepositorySpy = new GetPageDataRepositorySpy()
-		const sut = new ClientGetPage(getPageDataRepositorySpy)
+		const getPageRepositorySpy = new GetPageRepositorySpy()
+		const sut = new ClientGetPage(getPageRepositorySpy)
 
 		const result = await sut.getPage("any_link")
 
-		expect(result).toBe(getPageDataRepositorySpy.result)
+		expect(result).toBe(getPageRepositorySpy.result)
 	})
 })

@@ -15,7 +15,7 @@ describe("AxiosClient", () => {
 		const sut = new AxiosClientRepository()
 		jest.spyOn(axios, "get").mockImplementationOnce(throwError)
 
-		const promise = sut.getPageData("any_link")
+		const promise = sut.getPage("any_link")
         
 		await expect(promise).rejects.toThrow()
 	})
@@ -23,7 +23,7 @@ describe("AxiosClient", () => {
 	test("should return correct value", async () => {
 		const sut = new AxiosClientRepository()
 
-		const result = await sut.getPageData("any_link")
+		const result = await sut.getPage("any_link")
         
 		expect(result).toBe("any_string")
 	})
