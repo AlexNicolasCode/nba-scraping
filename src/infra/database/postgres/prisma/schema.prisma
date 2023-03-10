@@ -19,6 +19,6 @@ model Match {
 
 model Team {
   id      Int @id @default(autoincrement())
-  title   String
+  name   String
   matchs  Match[]
 }
