@@ -7,6 +7,7 @@
     "test:unit": "npm test -- --watch -c jest.unit.config.js",
     "test:integration": "npm run container:database:up && npm run database:push && npm test -- --watch -c jest.integration.config.js && npm run container:database:down",
     "database:generate": "prisma generate --schema=src/infra/database/postgres/prisma/schema.prisma",
+    "database:migrate:dev": "prisma migrate dev --schema=src/infra/database/postgres/prisma/schema.prisma",
     "database:push": "prisma db push --schema=src/infra/database/postgres/prisma/schema.prisma",
     "database:pull": "prisma db pull --schema=src/infra/database/postgres/prisma/schema.prisma",
     "container:database:up": "docker-compose up -d",
