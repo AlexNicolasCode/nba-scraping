@@ -19,11 +19,26 @@ class NbaTeamsScraping implements Scraping {
 	}
 }
 
+type SutTypes = {
+	sut: NbaTeamsScraping
+	getPageSpy: GetPageSpy
+	teamScrapingSpy: TeamScrapingSpy
+}
+
+const makeSut = (): SutTypes => {
+	const teamScrapingSpy = new TeamScrapingSpy()
+	const getPageSpy = new GetPageSpy()
+	const sut = new NbaTeamsScraping(getPageSpy, teamScrapingSpy)
+	return {
+		sut,
+		getPageSpy,
+		teamScrapingSpy,
+	}
+}
+
 describe("NbaTeamsScraping", () => {
 	test("should throw when GetPage throws", async () => {
-		const teamScrapingSpy = new TeamScrapingSpy()
-		const getPageSpy = new GetPageSpy()
-		const sut = new NbaTeamsScraping(getPageSpy, teamScrapingSpy)
+		const { sut, getPageSpy } = makeSut()
 		jest.spyOn(getPageSpy, "getPage").mockImplementationOnce(throwError)
 
 		const promise = sut.run("any_link")
@@ -32,9 +47,7 @@ describe("NbaTeamsScraping", () => {
 	})
 
 	test("should throw when TeamScraping throws", async () => {
-		const teamScrapingSpy = new TeamScrapingSpy()
-		const getPageSpy = new GetPageSpy()
-		const sut = new NbaTeamsScraping(getPageSpy, teamScrapingSpy)
+		const { sut, teamScrapingSpy } = makeSut()
 		jest.spyOn(teamScrapingSpy, "run").mockImplementationOnce(throwError)
 
 		const promise = sut.run("any_link")
@@ -43,9 +56,7 @@ describe("NbaTeamsScraping", () => {
 	})
 
 	test("should throw when page not found", async () => {
-		const teamScrapingSpy = new TeamScrapingSpy()
-		const getPageSpy = new GetPageSpy()
-		const sut = new NbaTeamsScraping(getPageSpy, teamScrapingSpy)
+		const { sut, getPageSpy } = makeSut()
 		getPageSpy.result = undefined
 
 		const promise = sut.run("any_link")
