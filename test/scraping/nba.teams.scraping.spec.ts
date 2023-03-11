@@ -16,6 +16,9 @@ class NbaTeamsScraping implements Scraping {
 			throw Error("page not found")
 		}
 		const teams = await this.teamScraping.run(page.data)
+		if (!teams.length) {
+			throw Error("teams not found")
+		}
 	}
 }
 
@@ -62,5 +65,14 @@ describe("NbaTeamsScraping", () => {
 		const promise = sut.run("any_link")
         
 		await expect(promise).rejects.toThrow(Error("page not found"))
+	})
+
+	test("should throw when teams not found", async () => {
+		const { sut, teamScrapingSpy } = makeSut()
+		teamScrapingSpy.result = []
+
+		const promise = sut.run("any_link")
+        
+		await expect(promise).rejects.toThrow(Error("teams not found"))
 	})
 })
