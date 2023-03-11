@@ -39,6 +39,6 @@ describe("NbaTeamsScraping", () => {
 
 		const promise = sut.run("any_link")
         
-		await expect(promise).toBe(getPageSpy.result)
+		await expect(promise).rejects.toThrow()
 	})
 })
