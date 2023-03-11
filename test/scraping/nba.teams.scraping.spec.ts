@@ -41,4 +41,15 @@ describe("NbaTeamsScraping", () => {
         
 		await expect(promise).rejects.toThrow()
 	})
+
+	test("should throw when page not found", async () => {
+		const teamScrapingSpy = new TeamScrapingSpy()
+		const getPageSpy = new GetPageSpy()
+		const sut = new NbaTeamsScraping(getPageSpy, teamScrapingSpy)
+		getPageSpy.result = undefined
+
+		const promise = sut.run("any_link")
+        
+		await expect(promise).rejects.toThrow(Error("page not found"))
+	})
 })
